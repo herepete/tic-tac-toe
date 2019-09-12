@@ -1,6 +1,6 @@
-def print_map(_map):
+def print_board(board):
     result = ''
-    for row in _map:
+    for row in board:
         for column in row:
             if column == 0:
                 result += '[ ]'
@@ -12,22 +12,22 @@ def print_map(_map):
     print(f'\r{result}')
 
 
-def is_win(_map, player):
+def is_win(board, player):
     r_combo = False
     c_combo = False
     rd_combo = False
     ld_combo = False
 
-    for row in _map:
+    for row in board:
         if len(set(row)) == 1 and row.count(player) == 3:
             r_combo = True
 
-    for column in list(zip(*_map)):
+    for column in list(zip(*board)):
         if len(set(column)) == 1 and column.count(player) == 3:
             c_combo = True
 
-    rd = [_map[i][i] for i in range(0, len(_map))]
-    ld = [_map[i][~i] for i in range(0, len(_map))]
+    rd = [board[i][i] for i in range(0, len(board))]
+    ld = [board[i][~i] for i in range(0, len(board))]
 
     rd_combo = len(set(rd)) == 1 and rd.count(player) == 3
     ld_combo = len(set(ld)) == 1 and ld.count(player) == 3
@@ -37,21 +37,21 @@ def is_win(_map, player):
 
 
 def main():
-    _map = [[0, 0, 0],
+    board = [[0, 0, 0],
             [0, 0, 0],
             [0, 0, 0]]
     x_move = True
     have_winner = False
 
     try:
-        while 0 in [item for sublist in _map for item in sublist]:
+        while 0 in [item for sublist in board for item in sublist]:
             row, column = list(map(int, input(f'{"X" if x_move else "O"} position: ').split()))
-            if _map[row - 1][column - 1] != 0:
+            if board[row - 1][column - 1] != 0:
                 print(f'{"X" if not x_move else "O"} is here. Take another position.')
                 continue
-            _map[row - 1][column - 1] = 1 if x_move else 2
-            print_map(_map)
-            if is_win(_map, 1 if x_move else 2):
+            board[row - 1][column - 1] = 1 if x_move else 2
+            print_board(board)
+            if is_win(board, 1 if x_move else 2):
                 have_winner = True
                 print(f'{"X" if x_move else "O"} win!')
                 break
