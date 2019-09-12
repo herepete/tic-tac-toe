@@ -1,38 +1,26 @@
 def print_board(board):
-    result = ''
     for row in board:
-        for column in row:
-            if column == 0:
-                result += '[ ]'
-            if column == 1:
-                result += '[X]'
-            if column == 2:
-                result += '[O]'
-        result += '\n'
-    print(f'\r{result}')
+        print(''.join(f'[{" XO"[i]}]' for i in row))
 
 
 def is_win(board, player):
-    r_combo = False
-    c_combo = False
-    rd_combo = False
-    ld_combo = False
-
     for row in board:
         if len(set(row)) == 1 and row.count(player) == 3:
-            r_combo = True
+            return True
 
     for column in list(zip(*board)):
         if len(set(column)) == 1 and column.count(player) == 3:
-            c_combo = True
+            return True
 
     rd = [board[i][i] for i in range(0, len(board))]
+    if len(set(rd)) == 1 and rd.count(player) == 3:
+        return True
+
     ld = [board[i][~i] for i in range(0, len(board))]
+    if len(set(ld)) == 1 and ld.count(player) == 3:
+        return True
 
-    rd_combo = len(set(rd)) == 1 and rd.count(player) == 3
-    ld_combo = len(set(ld)) == 1 and ld.count(player) == 3
-
-    return r_combo or c_combo or rd_combo or ld_combo
+    return False
 
 
 
@@ -44,10 +32,10 @@ def main():
     have_winner = False
 
     try:
-        while 0 in [item for sublist in board for item in sublist]:
-            row, column = list(map(int, input(f'{"X" if x_move else "O"} position: ').split()))
+        while 0 in sum(board, []):
+            row, column = map(int, input(f'{"X" if x_move else "O"} position: ').split())
             if board[row - 1][column - 1] != 0:
-                print(f'{"X" if not x_move else "O"} is here. Take another position.')
+                print(f'{"X" if board[row - 1][column - 1] == 1 else "O"} is here. Take another position.')
                 continue
             board[row - 1][column - 1] = 1 if x_move else 2
             print_board(board)
@@ -60,3 +48,6 @@ def main():
             print('no one won :(')
     except ValueError as e:
         print(e)
+    except KeyboardInterrupt:
+        print('\nexit...')
+        exit()
