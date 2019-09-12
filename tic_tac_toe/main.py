@@ -23,16 +23,16 @@ def is_win(board, player):
     return False
 
 
-
 def main():
     board = [[0, 0, 0],
-            [0, 0, 0],
-            [0, 0, 0]]
+             [0, 0, 0],
+             [0, 0, 0]]
     x_move = True
     have_winner = False
 
     try:
         while 0 in sum(board, []):
+            # FIXME: IndexError
             row, column = map(int, input(f'{"X" if x_move else "O"} position: ').split())
             if board[row - 1][column - 1] != 0:
                 print(f'{"X" if board[row - 1][column - 1] == 1 else "O"} is here. Take another position.')
@@ -44,9 +44,10 @@ def main():
                 print(f'{"X" if x_move else "O"} win!')
                 break
             x_move = not x_move
+            # TODO: clear previous outpu
         if not have_winner:
             print('no one won :(')
-    except ValueError as e:
+    except (ValueError, IndexError) as e:
         print(e)
     except KeyboardInterrupt:
         print('\nexit...')
