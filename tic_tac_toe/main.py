@@ -41,19 +41,22 @@ def main():
             [0, 0, 0],
             [0, 0, 0]]
     x_move = True
+    have_winner = False
 
     try:
-        for n in range(9):
+        while 0 in [item for sublist in _map for item in sublist]:
             row, column = list(map(int, input(f'{"X" if x_move else "O"} position: ').split()))
             if _map[row - 1][column - 1] != 0:
-                i -= 1
-                print(f'{"X" if x_move else "O"} is here. Take another position.')
+                print(f'{"X" if not x_move else "O"} is here. Take another position.')
                 continue
             _map[row - 1][column - 1] = 1 if x_move else 2
             print_map(_map)
             if is_win(_map, 1 if x_move else 2):
+                have_winner = True
                 print(f'{"X" if x_move else "O"} win!')
                 break
             x_move = not x_move
+        if not have_winner:
+            print('no one won :(')
     except ValueError as e:
         print(e)
