@@ -1,6 +1,3 @@
-import sys
-
-
 def print_map(_map):
     result = ''
     for row in _map:
