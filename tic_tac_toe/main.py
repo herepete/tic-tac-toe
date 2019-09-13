@@ -1,3 +1,6 @@
+import sys
+
+
 def print_board(board):
     for row in board:
         print(''.join(f'[{" XO"[i]}]' for i in row))
@@ -33,7 +36,17 @@ def user_input(prompt):
 
             return row, column
         except (ValueError, IndexError):
-            print("Incorrect input. Try again. ")
+            print('Incorrect input. Try again. ')
+
+
+def is_real_player():
+    if len(sys.argv) == 1:
+        return True
+
+    if 'ai' in sys.argv[1:]:
+        return False
+
+    return True
 
 
 def main():
@@ -42,6 +55,9 @@ def main():
              [0, 0, 0]]
     x_move = True
     have_winner = False
+
+    real_player = is_real_player()
+    print(f'Real player: {real_player}.')
 
     try:
         while 0 in sum(board, []):
