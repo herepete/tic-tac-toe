@@ -24,8 +24,7 @@ def is_win(board, player):
 
 
 def user_input(prompt):
-    correct_input = False
-    while not correct_input:
+    while True:
         try:
             row, column = map(int, input(prompt).split())
 
