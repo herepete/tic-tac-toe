@@ -23,6 +23,20 @@ def is_win(board, player):
     return False
 
 
+def user_input(prompt):
+    correct_input = False
+    while not correct_input:
+        try:
+            row, column = map(int, input(prompt).split())
+
+            if row < 1 or row > 3 or column < 1 or column > 3:
+                raise IndexError()
+
+            return row, column
+        except (ValueError, IndexError):
+            print("Incorrect input. Try again. ")
+
+
 def main():
     board = [[0, 0, 0],
              [0, 0, 0],
@@ -32,19 +46,22 @@ def main():
 
     try:
         while 0 in sum(board, []):
-            # FIXME: IndexError
-            row, column = map(int, input(f'{"X" if x_move else "O"} position: ').split())
+            row, column = user_input(f'{"X" if x_move else "O"} position: ')
+
             if board[row - 1][column - 1] != 0:
                 print(f'{"X" if board[row - 1][column - 1] == 1 else "O"} is here. Take another position.')
                 continue
+
             board[row - 1][column - 1] = 1 if x_move else 2
             print_board(board)
+
             if is_win(board, 1 if x_move else 2):
                 have_winner = True
                 print(f'{"X" if x_move else "O"} win!')
-                break
+                exit()
+
             x_move = not x_move
-            # TODO: clear previous outpu
+            # TODO: clear previous output
         if not have_winner:
             print('no one won :(')
     except (ValueError, IndexError) as e:
