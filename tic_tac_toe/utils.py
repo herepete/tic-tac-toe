@@ -1,4 +1,5 @@
 import sys
+import random
 
 
 def print_board(board):
@@ -15,18 +16,18 @@ def is_win(board, player):
         if len(set(column)) == 1 and column.count(player) == 3:
             return True
 
-    rd = [board[i][i] for i in range(0, len(board))]
-    if len(set(rd)) == 1 and rd.count(player) == 3:
+    r_diag = [board[i][i] for i in range(0, len(board))]
+    if len(set(r_diag)) == 1 and r_diag.count(player) == 3:
         return True
 
-    ld = [board[i][~i] for i in range(0, len(board))]
-    if len(set(ld)) == 1 and ld.count(player) == 3:
+    l_diag = [board[i][~i] for i in range(0, len(board))]
+    if len(set(l_diag)) == 1 and l_diag.count(player) == 3:
         return True
 
     return False
 
 
-def user_input(prompt):
+def usr_input(prompt):
     while True:
         try:
             row, column = map(int, input(prompt).split())
@@ -37,6 +38,10 @@ def user_input(prompt):
             return row, column
         except (ValueError, IndexError):
             print('Incorrect input. Try again. ')
+
+
+def ai_input(board):
+    return random.randint(1, 3), random.randint(1, 3)
 
 
 def is_real_player():
