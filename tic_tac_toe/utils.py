@@ -41,7 +41,13 @@ def usr_input(prompt):
 
 
 def ai_input(board):
-    return random.randint(1, 3), random.randint(1, 3)
+    while True:
+        row, col = random.randint(1, 3), random.randint(1, 3)
+
+        if board[row - 1][col - 1] != 0:
+            continue
+
+        return row, col
 
 
 def is_real_player():
