@@ -56,6 +56,7 @@ def pick_corner(board):
     raise ValueError()
 
 
+# TODO: reduce the number of returned statements
 def stop_win(board):
     xxo = [1, 1, 0]
     xox = [1, 0, 1]
@@ -100,6 +101,7 @@ def stop_win(board):
     raise ValueError()
 
 
+# TODO: reduce the number of returned statements
 def ai_win(board):
     oox = [2, 2, 0]
     oxo = [2, 0, 2]
