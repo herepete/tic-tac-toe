@@ -10,12 +10,13 @@ def main():
     real_player = is_real_player()
 
     try:
+        print_board(board)
         while 0 in sum(board, []):
             if real_player:
-                row, col = usr_input(f'{"X" if x_move else "O"} position: ')
+                row, col = usr_input("X" if x_move else "O")
             else:
                 if x_move:
-                    row, col = usr_input(f'{"X" if x_move else "O"} position: ')
+                    row, col = usr_input("X" if x_move else "O")
                 else:
                     row, col = ai_input(board)
 

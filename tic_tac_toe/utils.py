@@ -1,10 +1,22 @@
 import random
 import sys
 
+INPUT_PATTERN = "\n> {} position: "
+BOARD_PATTERN = " >> Welcome to TicTacToe! <<\n[{}][{}][{}]\n[{}][{}][{}]\n[{}][{}][{}]\n"
+
+
+def clear_output():
+    # TODO: try another way to clear previous output =_=
+    for _ in range(8192):
+        sys.stdout.write('\x1b[1A')
+        sys.stdout.write('\x1b[2K')
+
 
 def print_board(board):
-    for row in board:
-        print(''.join(f'[{" XO"[i]}]' for i in row))
+    result = BOARD_PATTERN.format(*sum(board, []))
+    result = result.replace('0', ' ').replace('1', 'X').replace('2', 'O')
+    clear_output()
+    print(result, end='')
 
 
 def is_win(board, player):
@@ -27,10 +39,10 @@ def is_win(board, player):
     return False
 
 
-def usr_input(prompt):
+def usr_input(player):
     while True:
         try:
-            row, column = map(int, input(prompt).split())
+            row, column = map(int, input(INPUT_PATTERN.format(player)).split())
 
             if row < 1 or row > 3 or column < 1 or column > 3:
                 raise IndexError()
