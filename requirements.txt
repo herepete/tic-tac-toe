@@ -1,0 +1,15 @@
+astroid
+autopep8
+isort
+lazy-object-proxy
+mccabe
+pep8
+pkg-resources
+pycodestyle
+pydocstyle
+pylint
+rope
+six
+snowballstemmer
+typed-ast
+wrapt
