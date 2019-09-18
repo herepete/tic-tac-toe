@@ -6,7 +6,6 @@ BOARD_PATTERN = " >> Welcome to TicTacToe! <<\n[{}][{}][{}]\n[{}][{}][{}]\n[{}][
 
 
 def clear_output():
-    # TODO: try another way to clear previous output =_=
     for _ in range(8192):
         sys.stdout.write('\x1b[1A')
         sys.stdout.write('\x1b[2K')

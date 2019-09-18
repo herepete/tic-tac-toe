@@ -33,7 +33,6 @@ def main():
                 exit()
 
             x_move = not x_move
-            # TODO: clear previous output
         if not have_winner:
             print('no one won :(')
     except (ValueError, IndexError) as error:
