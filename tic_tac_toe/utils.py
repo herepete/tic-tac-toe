@@ -49,7 +49,7 @@ def usr_input(player):
 
             return row, column
         except (ValueError, IndexError):
-            print('Incorrect input. Try again. ')
+            print('Incorrect input. Try again.(Your input needs to be in the format <number><space> <number> i.e "2 2" for the middle of the board) ')
 
 
 def pick_corner(board):
