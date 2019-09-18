@@ -10,11 +10,15 @@ Tic-tac-toe
 ### Enter a position
 Should be in the format number space number
 Examples:
+
 1 1 is the top left square 
+
 2 2 is the middle square
+
 3 3 is the bottom right square
 
-`` >> Welcome to TicTacToe! <<
+``` 
+>> Welcome to TicTacToe! <<
 [ ][ ][ ]
 [ ][ ][ ]
 [ ][ ][ ]
@@ -25,5 +29,5 @@ Examples:
 [ ][ ][ ]
 [ ][X][ ]
 [ ][ ][ ]
-``
+```
 
